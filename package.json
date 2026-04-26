@@ -1,7 +1,8 @@
 {
   "name": "koishi-plugin-lirio-tmp-bot",
-  "description": "12314241421",
-  "version": "0.0.1",
+  "description": "欧洲卡车模拟2 TMP查询插件; Lirio Logistics专用",
+  "version": "0.0.2",
+  "homepage": "https://github.com/Murphy08/koishi-plugin-prime-tmp-bot",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -9,14 +10,34 @@
     "dist"
   ],
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "sync:resources": "node scripts/copy-resources.js",
+    "build": "tsc -b && npm run sync:resources",
+    "prepack": "npm run build"
+  },
   "keywords": [
     "chatbot",
     "koishi",
-    "plugin"
+    "plugin",
+    "truckersmp",
+    "gametool",
+    "ets2",
+    "tmp",
+    "lirio"
   ],
-  "devDependencies": {},
+  "koishi": {
+    "service": {
+      "required": [
+        "database"
+      ]
+    }
+  },
   "peerDependencies": {
     "koishi": "^4.18.7"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "js-md5": "^0.8.3",
+    "marked": "^12.0.2"
   }
 }
