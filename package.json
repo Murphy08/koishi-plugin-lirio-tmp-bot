@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-lirio-tmp-bot",
   "description": "欧洲卡车模拟2 TMP查询插件; Lirio Logistics专用",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "homepage": "https://github.com/Murphy08/koishi-plugin-prime-tmp-bot",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
