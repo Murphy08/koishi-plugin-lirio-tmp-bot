@@ -1,9 +1,9 @@
 const { Logger } = require('koishi')
 
-const globalKey = '__primeTmpBotLogger'
+const globalKey = '__lirioTmpBotLogger'
 
 if (!globalThis[globalKey]) {
-  globalThis[globalKey] = new Logger('prime-tmp-bot')
+  globalThis[globalKey] = new Logger('lirio-tmp-bot')
 }
 
 if (!globalThis.logger) {
