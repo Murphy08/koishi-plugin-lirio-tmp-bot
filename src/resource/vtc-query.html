@@ -1,8 +1,9 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>VTC Profile</title>
+  <link href="./package/lirio-theme.css" rel="stylesheet">
+  <title>VTC 信息</title>
   <style>
     @font-face {
       font-family: 'segui-emj';
@@ -12,7 +13,7 @@
     }
 
     :root {
-      --white: #FFFFFF;
+      --white: #ffffff;
       --muted: rgba(255, 255, 255, 0.68);
       --line: rgba(255, 255, 255, 0.12);
     }
@@ -25,8 +26,8 @@
       margin: 0;
       padding: 0;
       background:
-        radial-gradient(circle at top, rgba(252, 143, 201, 0.28), transparent 42%),
-        linear-gradient(180deg, #000000 0%, #000000 100%);
+        radial-gradient(circle at top, rgba(122, 101, 219, 0.28), transparent 42%),
+        linear-gradient(180deg, #111111 0%, #000000 100%);
       font-family: 'segui-emj', 'Segoe UI', sans-serif;
       color: var(--white);
     }
@@ -37,7 +38,7 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background:
-        linear-gradient(160deg, rgba(252, 143, 201, 0.22) 0%, rgba(252, 143, 201, 0.05) 30%, rgba(0, 0, 0, 0.97) 100%);
+        linear-gradient(160deg, rgba(122, 101, 219, 0.22) 0%, rgba(122, 101, 219, 0.05) 30%, rgba(0, 0, 0, 0.97) 100%);
       box-shadow:
         0 22px 48px rgba(0, 0, 0, 0.52),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -49,7 +50,7 @@
       inset: 0;
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 24%),
-        linear-gradient(180deg, transparent, rgba(252, 143, 201, 0.12));
+        linear-gradient(180deg, transparent, rgba(122, 101, 219, 0.12));
       pointer-events: none;
     }
 
@@ -67,7 +68,7 @@
       right: 18px;
       bottom: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(252, 143, 201, 0.9), transparent);
+      background: linear-gradient(90deg, transparent, rgba(122, 101, 219, 0.9), transparent);
     }
 
     .page-header-top {
@@ -100,7 +101,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: rgba(255, 255, 255, 0.05);
       box-shadow:
-        0 12px 26px rgba(252, 143, 201, 0.2),
+        0 12px 26px rgba(122, 101, 219, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
@@ -131,9 +132,9 @@
       align-items: center;
       gap: 14px;
       padding: 14px;
-      border: 1px solid rgba(252, 143, 201, 0.35);
+      border: 1px solid rgba(122, 101, 219, 0.35);
       border-radius: 18px;
-      background: linear-gradient(135deg, rgba(252, 143, 201, 0.24), rgba(255, 255, 255, 0.04));
+      background: linear-gradient(135deg, rgba(122, 101, 219, 0.24), rgba(255, 255, 255, 0.04));
       box-shadow:
         0 14px 30px rgba(0, 0, 0, 0.28),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -267,8 +268,8 @@
           <img src="./package/img/logo.png" alt="Logo">
         </div>
       </div>
-      <div class="header-title">VTC Profile</div>
-      <div class="header-subtitle">Lirio Logistics TMP VTC lookup</div>
+      <div class="header-title">VTC 信息</div>
+      <div class="header-subtitle">车队档案</div>
       <div class="profile-card">
         <img class="avatar" id="vtc-logo" src="" alt="logo">
         <div class="info">
@@ -284,14 +285,14 @@
       </div>
 
       <div class="section">
-        <div class="section-title">VTC Details</div>
+        <div class="section-title">车队详情</div>
         <div class="form-box">
           <div class="form-item">
             <div class="label">VTC ID</div>
             <div class="value" id="detail-vtc-id"></div>
           </div>
           <div class="form-item">
-            <div class="label">Member Count</div>
+            <div class="label">成员数量</div>
             <div class="value" id="detail-member-count"></div>
           </div>
           <div class="form-item">
@@ -303,7 +304,7 @@
             <div class="value" id="detail-level"></div>
           </div>
           <div class="form-item full">
-            <div class="label">Create Time</div>
+            <div class="label">创建时间</div>
             <div class="value" id="detail-create-time"></div>
           </div>
         </div>
@@ -336,5 +337,3 @@
   </script>
 </body>
 </html>
-
-

@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <link href="./package/lirio-theme.css" rel="stylesheet">
   <title>Server List</title>
   <style>
     @font-face {
@@ -11,9 +12,9 @@
 
     :root {
       --accent: #FC8FC9;
-      --accent-soft: rgba(252, 143, 201, 0.18);
-      --accent-line: rgba(252, 143, 201, 0.42);
-      --text: #FFFFFF;
+      --accent-soft: rgba(122, 101, 219, 0.18);
+      --accent-line: rgba(122, 101, 219, 0.42);
+      --text: #ffffff;
       --muted: rgba(255, 255, 255, 0.68);
       --line: rgba(255, 255, 255, 0.1);
     }
@@ -27,8 +28,8 @@
       margin: 0;
       padding: 0;
       background:
-        radial-gradient(circle at top, rgba(252, 143, 201, 0.28), transparent 42%),
-        linear-gradient(180deg, #000000 0%, #000000 100%);
+        radial-gradient(circle at top, rgba(122, 101, 219, 0.28), transparent 42%),
+        linear-gradient(180deg, #111111 0%, #000000 100%);
       color: var(--text);
       font-family: 'segui-emj', 'Segoe UI', sans-serif;
     }
@@ -38,7 +39,7 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background:
-        linear-gradient(160deg, rgba(252, 143, 201, 0.22) 0%, rgba(252, 143, 201, 0.05) 30%, rgba(0, 0, 0, 0.97) 100%);
+        linear-gradient(160deg, rgba(122, 101, 219, 0.22) 0%, rgba(122, 101, 219, 0.05) 30%, rgba(0, 0, 0, 0.97) 100%);
       box-shadow:
         0 24px 52px rgba(0, 0, 0, 0.55),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -61,7 +62,7 @@
       right: 24px;
       bottom: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(252, 143, 201, 0.9), transparent);
+      background: linear-gradient(90deg, transparent, rgba(122, 101, 219, 0.9), transparent);
     }
 
     .kicker {
@@ -99,7 +100,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: rgba(255, 255, 255, 0.05);
       box-shadow:
-        0 12px 26px rgba(252, 143, 201, 0.2),
+        0 12px 26px rgba(122, 101, 219, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
@@ -178,7 +179,7 @@
     }
 
     .player-count .num {
-      color: #FFFFFF;
+      color: #ffffff;
       font-weight: 700;
     }
 
@@ -216,8 +217,8 @@
     <div class="header">
       <div>
         <div class="kicker">Lirio Logistics</div>
-        <div class="title">TruckersMP Servers</div>
-        <div class="subtitle">Live server status and population trend</div>
+        <div class="title">TruckersMP 服务器</div>
+        <div class="subtitle">服务器状态与在线人数趋势</div>
       </div>
       <div class="logo">
         <img src="./package/img/logo.png" alt="Logo">
@@ -247,8 +248,8 @@
         <svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="rgba(252,143,201,0.45)"/>
-              <stop offset="100%" stop-color="rgba(252,143,201,0.02)"/>
+              <stop offset="0%" stop-color="rgba(122,101,219,0.45)"/>
+              <stop offset="100%" stop-color="rgba(122,101,219,0.02)"/>
             </linearGradient>
           </defs>
           <path d="${areaD}" fill="url(#${gid})"/>

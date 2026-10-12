@@ -1,8 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Mileage Leaderboard</title>
+  <link href="./package/lirio-theme.css" rel="stylesheet">
+  <title>里程排行榜</title>
   <style>
     @font-face {
       font-family: 'segui-emj';
@@ -13,10 +14,10 @@
 
     :root {
       --accent: #FC8FC9;
-      --accent-soft: rgba(252, 143, 201, 0.18);
-      --accent-strong: rgba(252, 143, 201, 0.34);
+      --accent-soft: rgba(122, 101, 219, 0.18);
+      --accent-strong: rgba(122, 101, 219, 0.34);
       --black: #000000;
-      --white: #FFFFFF;
+      --white: #ffffff;
       --muted: rgba(255, 255, 255, 0.68);
       --line: rgba(255, 255, 255, 0.12);
       --panel: rgba(255, 255, 255, 0.06);
@@ -31,8 +32,8 @@
       margin: 0;
       padding: 0;
       background:
-        radial-gradient(circle at top, rgba(252, 143, 201, 0.3), transparent 42%),
-        linear-gradient(180deg, #000000 0%, #000000 100%);
+        radial-gradient(circle at top, rgba(122, 101, 219, 0.3), transparent 42%),
+        linear-gradient(180deg, #111111 0%, #000000 100%);
       font-family: 'segui-emj', 'Segoe UI', sans-serif;
       color: var(--white);
     }
@@ -43,7 +44,7 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background:
-        linear-gradient(160deg, rgba(252, 143, 201, 0.22) 0%, rgba(252, 143, 201, 0.04) 32%, rgba(0, 0, 0, 0.96) 100%);
+        linear-gradient(160deg, rgba(122, 101, 219, 0.22) 0%, rgba(122, 101, 219, 0.04) 32%, rgba(0, 0, 0, 0.96) 100%);
       box-shadow:
         0 20px 44px rgba(0, 0, 0, 0.55),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -55,7 +56,7 @@
       inset: 0;
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 26%),
-        linear-gradient(180deg, transparent, rgba(252, 143, 201, 0.1));
+        linear-gradient(180deg, transparent, rgba(122, 101, 219, 0.1));
       pointer-events: none;
     }
 
@@ -76,7 +77,7 @@
       right: 18px;
       bottom: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(252, 143, 201, 0.9), transparent);
+      background: linear-gradient(90deg, transparent, rgba(122, 101, 219, 0.9), transparent);
     }
 
     .header-kicker {
@@ -141,17 +142,17 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(252, 143, 201, 0.12), transparent 42%);
+      background: linear-gradient(90deg, rgba(122, 101, 219, 0.12), transparent 42%);
       opacity: 0;
       transition: opacity 0.2s ease;
       pointer-events: none;
     }
 
     .leaderboard-item.top3 {
-      border-color: rgba(252, 143, 201, 0.5);
-      background: linear-gradient(135deg, rgba(252, 143, 201, 0.26), rgba(255, 255, 255, 0.05));
+      border-color: rgba(122, 101, 219, 0.5);
+      background: linear-gradient(135deg, rgba(122, 101, 219, 0.26), rgba(255, 255, 255, 0.05));
       box-shadow:
-        0 10px 26px rgba(252, 143, 201, 0.18),
+        0 10px 26px rgba(122, 101, 219, 0.18),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
@@ -161,10 +162,10 @@
     }
 
     .leaderboard-item.current-player {
-      border-color: rgba(252, 143, 201, 0.68);
-      background: linear-gradient(135deg, rgba(252, 143, 201, 0.34), rgba(255, 255, 255, 0.06));
+      border-color: rgba(122, 101, 219, 0.68);
+      background: linear-gradient(135deg, rgba(122, 101, 219, 0.34), rgba(255, 255, 255, 0.06));
       box-shadow:
-        0 12px 30px rgba(252, 143, 201, 0.22),
+        0 12px 30px rgba(122, 101, 219, 0.22),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
@@ -245,7 +246,7 @@
     .divider {
       height: 1px;
       margin: 12px 14px 0;
-      background: linear-gradient(90deg, transparent, rgba(252, 143, 201, 0.8), transparent);
+      background: linear-gradient(90deg, transparent, rgba(122, 101, 219, 0.8), transparent);
     }
 
     .current-player-title {
@@ -281,7 +282,7 @@
     <div class="header">
       <div><div class="header-kicker">Lirio Logistics</div>
       <div class="title">里程排行榜</div>
-      <div class="header-subtitle">Mileage Leaderboard</div></div>
+      <div class="header-subtitle">里程数据排行</div></div>
       
       <div>
         <div class="header-logo">
@@ -290,7 +291,7 @@
     </div>
 
     <div class="leaderboard-container">
-      <div class="section-label">Top 10 Drivers</div>
+      <div class="section-label">前十名玩家</div>
       <div id="top-rankings"></div>
     </div>
 
@@ -299,14 +300,15 @@
     <div class="current-player-container">
       <div class="current-player-title">
         <span>我的排名</span>
-        <span>Your Position</span>
+        <span>当前玩家</span>
       </div>
       <div id="current-player"></div>
     </div>
 
     <div class="footer-note" id="footer-note">
       © Superman-Q 2026. All rights reserved. <br/>
-      本页面仅供Lirio Logistics内部使用，未经授权禁止转载或商用。    </div>
+      本页面仅供Lirio Logistics内部使用，未经授权禁止转载或商用。
+    </div>
   </div>
 
   <script>
@@ -324,11 +326,11 @@
           <div class="rank ${rankClass}">#${rank}</div>
           <div class="player-info">
             <div class="player-name">${playerName}</div>
-            <div class="player-meta">${isCurrentPlayer ? 'Current Driver' : isTop3 ? 'Top Performer' : 'Distance Ranking'}</div>
+            <div class="player-meta">${isCurrentPlayer ? '我的排名' : isTop3 ? '前三名' : '里程排名'}</div>
           </div>
           <div class="mileage-block">
             <div class="mileage-value">${formatMileage(mileage)}</div>
-            <div class="mileage-label">Mileage</div>
+            <div class="mileage-label">里程</div>
           </div>
         </div>
       `;
@@ -378,8 +380,8 @@
           2: '今日里程排行榜'
         };
         const subtitles = {
-          1: 'Total Mileage Leaderboard',
-          2: 'Today Mileage Leaderboard'
+          1: '总里程排行榜',
+          2: '今日里程排行榜'
         };
         const footerNotes = {
           1: '* 数据自 2025-01-03 20:00 起开始统计',
@@ -387,7 +389,7 @@
         };
 
         titleElement.textContent = titles[apiData.rankingType] || '里程排行榜';
-        if (subtitleElement) subtitleElement.textContent = subtitles[apiData.rankingType] || 'Mileage Leaderboard';
+        if (subtitleElement) subtitleElement.textContent = subtitles[apiData.rankingType] || '里程排行榜';
         if (footerElement) footerElement.textContent = footerNotes[apiData.rankingType] || '* 数据统计说明';
       }
 
@@ -463,7 +465,7 @@
     const sampleData = {
       topRankings: [
         { name: "Afo780", mileage: 347167 },
-        { name: "Sample Driver", mileage: 331177 },
+        { name: "l伪d褍 谓伪l褦褟ij伪", mileage: 331177 },
         { name: "Stefan Z", mileage: 330658 },
         { name: "YorkshireSlacka", mileage: 328871 },
         { name: "Sun      [PL]", mileage: 327208 },
@@ -486,4 +488,3 @@
   </script>
 </body>
 </html>
-
