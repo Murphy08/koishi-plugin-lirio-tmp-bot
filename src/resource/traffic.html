@@ -1,10 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Traffic Heatmap</title>
+  <title>路况热力图</title>
   <link href="./package/leaflet/leaflet.min.css" rel="stylesheet">
+  <link href="./package/lirio-theme.css" rel="stylesheet">
   <script src="./package/leaflet/leaflet.min.js"></script>
+  <script src="./package/ets-map.js"></script>
   <script src="./package/leaflet/heatmap.min.js"></script>
   <script src="./package/leaflet/leaflet-heatmap.js"></script>
   <style>
@@ -17,7 +19,7 @@
 
     :root {
       --accent: #FC8FC9;
-      --white: #FFFFFF;
+      --white: #ffffff;
       --muted: rgba(255, 255, 255, 0.68);
       --line: rgba(255, 255, 255, 0.12);
     }
@@ -30,8 +32,8 @@
       margin: 0;
       padding: 0;
       background:
-        radial-gradient(circle at top, rgba(252, 143, 201, 0.28), transparent 42%),
-        linear-gradient(180deg, #000000 0%, #000000 100%);
+        radial-gradient(circle at top, rgba(122, 101, 219, 0.28), transparent 42%),
+        linear-gradient(180deg, #111111 0%, #000000 100%);
       font-family: 'segui-emj', 'Segoe UI', sans-serif;
       color: var(--white);
     }
@@ -42,7 +44,7 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background:
-        linear-gradient(160deg, rgba(252, 143, 201, 0.22) 0%, rgba(252, 143, 201, 0.05) 28%, rgba(0, 0, 0, 0.97) 100%);
+        linear-gradient(160deg, rgba(122, 101, 219, 0.22) 0%, rgba(122, 101, 219, 0.05) 28%, rgba(0, 0, 0, 0.97) 100%);
       box-shadow:
         0 24px 52px rgba(0, 0, 0, 0.55),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -54,7 +56,7 @@
       inset: 0;
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 24%),
-        linear-gradient(180deg, transparent, rgba(252, 143, 201, 0.12));
+        linear-gradient(180deg, transparent, rgba(122, 101, 219, 0.12));
       pointer-events: none;
     }
 
@@ -76,7 +78,7 @@
       right: 22px;
       bottom: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(252, 143, 201, 0.9), transparent);
+      background: linear-gradient(90deg, transparent, rgba(122, 101, 219, 0.9), transparent);
     }
 
     .header-kicker {
@@ -117,7 +119,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: rgba(255, 255, 255, 0.05);
       box-shadow:
-        0 12px 26px rgba(252, 143, 201, 0.2),
+        0 12px 26px rgba(122, 101, 219, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
@@ -212,7 +214,7 @@
       min-width: 88px;
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(252, 143, 201, 0.16);
+      background: rgba(122, 101, 219, 0.16);
       color: rgba(255, 255, 255, 0.82);
       font-size: 12px;
       text-align: center;
@@ -235,8 +237,8 @@
     <div class="page-header">
       <div>
         <div class="header-kicker">Lirio Logistics</div>
-        <div class="header-title">Traffic Heatmap</div>
-        <div class="header-subtitle">Lirio Logistics road activity overview</div>
+        <div class="header-title">路况热力图</div>
+        <div class="header-subtitle">道路活动总览</div>
       </div>
       <div class="header-logo">
         <img src="./package/img/logo.png" alt="Logo">
@@ -249,103 +251,38 @@
 
     <div class="traffic-section">
       <div class="section-head">
-        <div class="section-title">Hot Regions</div>
-        <div class="section-note">Live congestion overview</div>
+        <div class="section-title">热门区域</div>
+        <div class="section-note">实时拥堵概览</div>
       </div>
       <div class="traffic-box"></div>
     </div>
   </div>
 
   <script>
-    let mapConfig = {
-      ets: {
-        tileUrl: 'https://ets-map.oss-cn-beijing.aliyuncs.com/ets2/05102019/{z}/{x}/{y}.png',
-        multipliers: {
-          x: 70272,
-          y: 76157
-        },
-        breakpoints: {
-          uk: {
-            x: -31056.8,
-            y: -5832.867
-          }
-        },
-        bounds: {
-          y: 131072,
-          x: 131072
-        },
-        maxZoom: 8,
-        minZoom: 2,
-        calculateMapCoordinate(x, y) {
-          return [
-            x / 1.609055 + mapConfig.ets.multipliers.x,
-            y / 1.609055 + mapConfig.ets.multipliers.y
-          ];
-        }
-      },
-      promods: {
-        tileUrl: 'https://ets-map.oss-cn-beijing.aliyuncs.com/promods/05102019/{z}/{x}/{y}.png',
-        multipliers: {
-          x: 51953,
-          y: 76024
-        },
-        breakpoints: {
-          uk: {
-            x: -31056.8,
-            y: -5832.867
-          }
-        },
-        bounds: {
-          y: 131072,
-          x: 131072
-        },
-        maxZoom: 8,
-        minZoom: 2,
-        calculateMapCoordinate(x, y) {
-          return [
-            x / 2.598541 + mapConfig.promods.multipliers.x,
-            y / 2.598541 + mapConfig.promods.multipliers.y
-          ];
-        }
-      }
-    };
-
-    let map = L.map('map', {
-      attributionControl: false,
-      crs: L.CRS.Simple,
-      zoomControl: false,
-      zoomSnap: 0.1
-    });
+    let map;
 
     function setData(data) {
-      let bounds = L.latLngBounds(
-        map.unproject([0, mapConfig[data.mapType].bounds.y], mapConfig[data.mapType].maxZoom),
-        map.unproject([mapConfig[data.mapType].bounds.x, 0], mapConfig[data.mapType].maxZoom)
-      );
+      map = L.map('map', {
+        attributionControl: false,
+        crs: createTmpMapCrs(data.mapType),
+        zoomControl: false,
+        zoomSnap: 0.25,
+        minZoom: -3,
+        maxZoom: 3
+      });
+      const bounds = getTmpMapBounds(data.mapType);
+      map.setMaxBounds(bounds);
 
-      L.tileLayer(mapConfig[data.mapType].tileUrl, {
-        minZoom: 0,
-        maxZoom: 8,
-        minNativeZoom: 1,
-        maxNativeZoom: 8,
-        tileSize: 512,
-        bounds: bounds,
-        reuseTiles: true
-      }).addTo(map);
+      const tileLayer = createTmpTileLayer(data.mapType, map);
+      markTmpMapReadyWhenTilesLoad(tileLayer);
+      tileLayer.addTo(map);
 
-      map.setMaxBounds(
-        new L.LatLngBounds(
-          map.unproject([0, mapConfig[data.mapType].bounds.y], mapConfig[data.mapType].maxZoom),
-          map.unproject([mapConfig[data.mapType].bounds.x, 0], mapConfig[data.mapType].maxZoom)
-        )
-      );
-
-      map.fitBounds(bounds);
+      map.setView(bounds.getCenter(), -1.75);
 
       let heatmapLayer = new HeatmapOverlay({
-        radius: 5,
+        radius: 16,
         maxOpacity: 0.85,
-        scaleRadius: true,
+        scaleRadius: false,
         useLocalExtrema: true,
         latField: 'lat',
         lngField: 'lng',
@@ -353,7 +290,7 @@
         gradient: {
           0.2: 'rgba(255, 255, 255, 0.15)',
           0.4: '#FC8FC9',
-          0.7: '#FC8FC9',
+          0.7: '#FFB6D9',
           1.0: '#FFFFFF'
         }
       });
@@ -361,7 +298,7 @@
 
       let heatmapData = [];
       for (const coordinate of (data.playerCoordinateList || [])) {
-        let unprojected = map.unproject(mapConfig[data.mapType].calculateMapCoordinate(coordinate[0], coordinate[1]), 8);
+        let unprojected = getTmpMapLatLng(data.mapType, coordinate[0], coordinate[1]);
         heatmapData.push({ lat: unprojected.lat, lng: unprojected.lng, count: 1 });
       }
 
@@ -378,7 +315,7 @@
         trafficBox.insertAdjacentHTML('beforeend', `
           <div class="traffic-item">
             <span class="region-info"><strong>${traffic.country}</strong>${traffic.province}</span>
-            <span class="player-count">${traffic.playerCount} players</span>
+            <span class="player-count">${traffic.playerCount} 人</span>
             <span class="traffic-status" style="color: ${traffic.severity.color}">${traffic.severity.text}</span>
           </div>
         `);
@@ -387,5 +324,3 @@
   </script>
 </body>
 </html>
-
-
